@@ -13,10 +13,47 @@ data = [['thomas', 100], ['nicholas', 200], ['danson', 300]]
 df = pd.DataFrame(data, columns = ['name', 'Age'])
 df
 # %%
-url = 'https://gist.githubusercontent.com/michhar/2dfd2de0d4f8727f873422c5d959fff5/raw/ff414a1bcfcba32481e4d4e8db578e55872a2ca1/titanic.csv'
-df = pd.read_csv(url, sep='\t')
+url = 'https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv'
+df = pd.read_csv(url, sep=',')
+# %%
+df.info()
 
 # %%
-df
+df.nunique()
 
+# %%
+df[['Pclass', 'Sex']]
+
+# %%
+df.drop(['PassengerId', 'Name', 'Ticket'], axis = 1, inplace=True)
+df.iloc[500:511]
+# %%
+df[df['Sex'] == 'male']
+# %%
+df[['Pclass', 'Sex']][df['Sex'] == 'male'].iloc[500:511]
+
+# %%
+df.describe()
+
+# %%
+df.corr()
+
+# %%
+df['Sex'].value_counts()
+
+# %%
+df.isnull().sum()
+
+# %%
+df[df['Age'].isnull()]
+
+# %%
+#df['Age'].fillna(df['Age'].mean())
+df.dropna(inplace=True)
+# %%
+df.isnull().sum()
+
+# %%
+df.groupby('Pclass').mean()
+df.groupby('Pclass')['Age'].mean()
 # %%
